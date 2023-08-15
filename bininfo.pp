@@ -262,27 +262,20 @@ end;
 
 function AttrToString(const Attr: LongInt): string;
 const
+  FA_ARCHIVE = $20;
   FA_READONLY = $01;
   FA_HIDDEN = $02;
   FA_SYSFILE = $04;
-  FA_ARCHIVE = $20;
 begin
-  if (Attr and FA_READONLY) <> 0 then
-    result := 'r'
-  else
-    result := '-';
+  result := '----';
   if (Attr and FA_ARCHIVE) <> 0 then
-    result := result + 'a'
-  else
-    result := result + '-';
+    result[1] := 'a';
+  if (Attr and FA_READONLY) <> 0 then
+    result[2] := 'r';
   if (Attr and FA_HIDDEN) <> 0 then
-    result := result + 'h'
-  else
-    result := result + '-';
+    result[3] := 'h';
   if (Attr and FA_SYSFILE) <> 0 then
-    result := result + 's'
-  else
-    result := result + '-';
+    result[4] := 's';
 end;
 
 procedure WriteBinInfo(const FileName: string; CSVOutput: Boolean);
@@ -452,8 +445,9 @@ begin
     end
     else
     begin
-      WriteLn('--version "', CommandLine.ArgVersion, '" is > file version (',
-        BinaryFile.Version, ').');
+      if CommandLine.Verbose then
+        WriteLn('--version "', CommandLine.ArgVersion, '" is > file version (',
+          BinaryFile.Version, ').');
     end;
   end;
 

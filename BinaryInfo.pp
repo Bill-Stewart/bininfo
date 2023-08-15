@@ -150,10 +150,10 @@ begin
       begin
         with pFileInfo^ do
         begin
-          result := IntToStr(HiWord(LongInt(dwFileVersionMS))) + '.' +
-            IntToStr(LoWord(LongInt(dwFileVersionMS))) + '.' +
-            IntToStr(HiWord(LongInt(dwFileVersionLS))) + '.' +
-            IntToStr(LoWord(LongInt(dwFileVersionLS)));
+          result := IntToStr(HiWord(dwFileVersionMS)) + '.' +
+            IntToStr(LoWord(dwFileVersionMS)) + '.' +
+            IntToStr(HiWord(dwFileVersionLS)) + '.' +
+            IntToStr(LoWord(dwFileVersionLS));
         end;
       end;
     end;
@@ -205,6 +205,7 @@ end;
 function TWindowsBinaryFile.GetSubsystemName(const Subsystem: Word): string;
 begin
   case Subsystem of
+    IMAGE_SUBSYSTEM_UNKNOWN: result := 'Unknown';
     IMAGE_SUBSYSTEM_NATIVE: result := 'Native';
     IMAGE_SUBSYSTEM_WINDOWS_GUI: result := 'GUI';
     IMAGE_SUBSYSTEM_WINDOWS_CUI: result := 'Console';

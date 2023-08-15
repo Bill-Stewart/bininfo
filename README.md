@@ -69,3 +69,7 @@ Parameter names are case-sensitive. Omit all parameters to output file details. 
 ## Technical Details
 
 **bininfo** uses the Windows [ImageLoad API function](https://learn.microsoft.com/en-us/windows/win32/api/imagehlp/nf-imagehlp-imageload) to retrieve information about binary files.
+
+## Icon Attribution
+
+Program icon courtesy of [Icons8](https://icons8.com/) - [Online Binary Code](https://icons8.com/icon/UVQTFk728g0D/online-binary-code)
